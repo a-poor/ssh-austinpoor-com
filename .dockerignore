@@ -1,0 +1,8 @@
+.git/
+assets/
+README.md
+Dockerfile
+fly.toml
+.dockerignore
+.gitignore
+.env*

@@ -1,0 +1,35 @@
+# fly.toml app configuration file generated for ssh-austinpoor-com on 2024-05-23T08:59:46-07:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'ssh-austinpoor-com'
+primary_region = 'sjc'
+
+[build]
+[build.args]
+GO_VERSION = '1.22.0'
+
+[env]
+HOST = '0.0.0.0'
+PORT = '2222'
+
+[services]
+internal_port = 2222
+protocol = "tcp"
+auto_stop_machines = true
+auto_start_machines = true
+min_machines_running = 0
+processes = ['app']
+[[services.ports]]
+port = 22
+
+[[vm]]
+memory = '1gb'
+cpu_kind = 'shared'
+cpus = 1
+
+[mounts]
+source = "sshshared"
+destination = "/shared"
+initial_size = "1gb"
