@@ -62,11 +62,15 @@ Set FontSize 16
 Set Width 1400
 Set Height 800
 
+Hide
+Type "export PS1='$ '" Enter
+Type "clear" Enter
+Show
+
 Type "ssh ssh.austinpoor.com" Sleep 500ms  Enter
 
 Sleep 3s
 
 Type "q"
-Enter
 Sleep 1s
 
