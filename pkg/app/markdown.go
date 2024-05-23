@@ -6,6 +6,12 @@ import (
 	"github.com/charmbracelet/bubbles/viewport"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/glamour"
+	"github.com/charmbracelet/lipgloss"
+)
+
+const (
+	defaultWidth  = 80
+	defaultHeight = 24
 )
 
 //go:embed index.md
@@ -23,24 +29,30 @@ type MDViewer struct {
 }
 
 func NewMDViewer() (*MDViewer, error) {
+	// Get the color scheme...
+	scheme := "dracula"
+	if !lipgloss.HasDarkBackground() {
+		scheme = "light"
+	}
+
 	// Create the markdown renderer
 	gtr, err := glamour.NewTermRenderer(
-		glamour.WithStandardStyle("dracula"),
+		glamour.WithStandardStyle(scheme),
 		glamour.WithEmoji(),
-		glamour.WithWordWrap(80),
+		glamour.WithWordWrap(defaultWidth-1),
 	)
 	if err != nil {
 		return nil, err
 	}
 
 	// Create the scrollable viewport
-	vp := viewport.New(80, 24)
+	vp := viewport.New(defaultWidth, defaultHeight)
 
 	// Create the MDViewer
 	mdv := &MDViewer{
 		Text:   "",
-		Width:  80,
-		Height: 24,
+		Width:  defaultWidth,
+		Height: defaultHeight,
 		VP:     &vp,
 		GTR:    gtr,
 	}
@@ -79,9 +91,11 @@ func (m *MDViewer) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
 	case tea.KeyMsg:
 		switch msg.String() {
-		case "q":
+		case "q", "esc", "ctrl+c":
 			return m, tea.Quit
 		}
+	case tea.WindowSizeMsg:
+		m.setSize(msg.Width, msg.Height)
 	}
 
 	vp, cmd := m.VP.Update(msg)
@@ -89,6 +103,17 @@ func (m *MDViewer) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	return m, cmd
 }
 
+func (m *MDViewer) setSize(w, h int) {
+	m.Width = w
+	m.Height = h
+	m.VP.Width = w
+	m.VP.Height = h
+}
+
 func (m *MDViewer) View() string {
-	return m.VP.View()
+	vp := m.VP.View()
+	return lipgloss.JoinHorizontal(
+		lipgloss.Top,
+		vp,
+	)
 }

@@ -36,11 +36,15 @@ func main() {
 	if port == "" {
 		port = defaultPort
 	}
+	hostKeyPath := os.Getenv("HOST_KEY_PATH")
+	if hostKeyPath == "" {
+		panic("HOST_KEY_PATH must be set")
+	}
 
 	// Create the server...
 	s, err := wish.NewServer(
 		wish.WithAddress(net.JoinHostPort(host, port)),
-		wish.WithHostKeyPath("/shared/.ssh/id_ed25519"),
+		wish.WithHostKeyPath(hostKeyPath),
 		wish.WithIdleTimeout(5*time.Minute),
 		wish.WithMaxTimeout(60*time.Minute),
 		wish.WithMiddleware(

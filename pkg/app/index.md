@@ -2,11 +2,20 @@
 
 Hi, I'm Austin! Welcome to my SSH app!
 
-## About Me
+## About Me :man:
 
-My name is Austin! I'm a software engineer living in Los Angeles, CA.
+My name is Austin! I'm a full-stack software engineer living in Los Angeles, CA.
 
-## About This
+I like building websites, APIs, and other small projects. I like writing code
+in Go, Rust, TypeScript, Python (plus other languages, where I can).
+
+You can also find me at the following places:
+
+- [My Website](https://austinpoor.com)
+- [GitHub](https://github.com/a-poor)
+- [LinkedIn](https://linkedin/in/austinpoor)
+
+## About This :computer:
 
 This SSH app is built with Go, Bubble Tea, and Wish.
 
