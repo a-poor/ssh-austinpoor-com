@@ -4,11 +4,11 @@
 #
 
 app = 'ssh-austinpoor-com'
-primary_region = 'sjc'
+primary_region = 'lax'
 
 [build]
 [build.args]
-GO_VERSION = '1.22.0'
+GO_VERSION = '1.26.5'
 
 [env]
 HOST = '0.0.0.0'
