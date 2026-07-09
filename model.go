@@ -3,6 +3,7 @@ package main
 import (
 	"charm.land/bubbles/v2/viewport"
 	tea "charm.land/bubbletea/v2"
+	"charm.land/glamour/v2"
 )
 
 type model struct {
@@ -12,7 +13,11 @@ type model struct {
 
 func makeModel() model {
 	// Read the markdown file
-	s, err := contentfs.ReadFile("content/js-in-rs.md")
+	b, err := contentfs.ReadFile("content/js-in-rs.md")
+	if err != nil {
+		panic(err)
+	}
+	s, err := glamour.Render(string(b), "dark")
 	if err != nil {
 		panic(err)
 	}
@@ -25,7 +30,7 @@ func makeModel() model {
 	vp.SetHeight(30)
 
 	// Set the content
-	vp.SetContent(string(s))
+	vp.SetContent(s)
 
 	// Done
 	return model{
