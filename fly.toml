@@ -8,7 +8,7 @@ primary_region = 'lax'
 
 [build]
 [build.args]
-GO_VERSION = '1.26.5'
+GO_VERSION = '1.27.3'
 
 [env]
 HOST = '0.0.0.0'

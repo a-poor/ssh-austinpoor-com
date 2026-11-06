@@ -1,0 +1,15 @@
+WEBSITE_DIR ?= ../austinpoor-dot-com
+
+.PHONY: content build run test
+
+content:
+	go run ./cmd/sync-content -source "$(WEBSITE_DIR)"
+
+build: content
+	go build -o bin/ssh-austinpoor-com .
+
+run: content
+	go run .
+
+test:
+	go test ./...

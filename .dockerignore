@@ -6,3 +6,4 @@ fly.toml
 .dockerignore
 .gitignore
 .env*
+bin/
