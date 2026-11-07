@@ -5,8 +5,18 @@
 _created by Austin Poor_
 
 A terminal companion to [austinpoor.com](https://austinpoor.com), built with Go,
-Wish, Bubble Tea, Bubbles, Lip Gloss, and Glamour. It has Home, About, Blog, and This
-Project sections, with searchable posts and a Markdown reader.
+Wish, Bubble Tea, Bubbles, Lip Gloss, and Glamour. It has Home, About, Blog, and
+This Project sections, with searchable posts and a Markdown reader.
+
+## Try it
+
+```sh
+ssh ssh.austinpoor.com
+```
+
+No installation or account is needed. The first connection may take a moment
+while Fly starts the app. Use `Tab` to explore, `/` to search the blog, and `q`
+to quit.
 
 ## Run locally
 
@@ -17,8 +27,8 @@ private website repository:
 make run WEBSITE_DIR=../austinpoor-dot-com
 ```
 
-`make run` and `make build` refresh the blog snapshot before compiling. `make
-build` writes `bin/ssh-austinpoor-com`. To refresh content separately:
+`make run` and `make build` refresh the blog snapshot before compiling.
+`make build` writes `bin/ssh-austinpoor-com`. To refresh content separately:
 
 ```sh
 go run ./cmd/sync-content -source /path/to/austinpoor-dot-com
@@ -111,8 +121,9 @@ The container runs `serve`, listens on `0.0.0.0:2222`, and stores its host key a
 `/shared/.ssh/id_ed25519`. Reusing the volume preserves its SSH identity.
 
 `fly.toml` maps public TCP port 22 to port 2222, adds a TCP health check, and
-mounts the existing `sshshared` volume at `/shared` in San Jose (`sjc`). The process has a 15-second
-shutdown window. Before a Fly deployment, refresh the content locally:
+mounts the existing `sshshared` volume at `/shared` in San Jose (`sjc`). The
+process has a 15-second shutdown window. Before a Fly deployment, refresh the
+content locally:
 
 ```sh
 make content WEBSITE_DIR=../austinpoor-dot-com
@@ -136,5 +147,27 @@ make build WEBSITE_DIR=../austinpoor-dot-com
 ```
 
 Tests cover content imports, viewer navigation and search, terminal resizing,
-real SSH sessions, session isolation, host-key reuse, and server shutdown. The
-demo above still shows the earlier SSH version.
+real SSH sessions, session isolation, host-key reuse, and server shutdown.
+
+## Regenerate the demo
+
+The GIF is recorded from the deployed SSH site using [VHS](https://github.com/charmbracelet/vhs)
+and [demo.tape](./demo.tape). It walks through the pages, searches for a post,
+opens the article, and scrolls through it.
+
+Install VHS and its recording dependencies (macOS/Homebrew):
+
+```sh
+brew install vhs ttyd ffmpeg
+```
+
+Connect to `ssh ssh.austinpoor.com` once to verify and trust its host key, then
+run these commands from the repository root:
+
+```sh
+vhs validate demo.tape
+vhs demo.tape
+```
+
+This replaces `assets/demo.gif`. The tape waits for the live app to load and
+hides connection delays from the recording.
