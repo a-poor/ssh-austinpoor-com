@@ -108,10 +108,10 @@ docker run --rm -p 127.0.0.1:2222:2222 \
 ```
 
 The container runs `serve`, listens on `0.0.0.0:2222`, and stores its host key at
-`/shared/ssh_host_ed25519_key`. Reusing the volume preserves its SSH identity.
+`/shared/.ssh/id_ed25519`. Reusing the volume preserves its SSH identity.
 
 `fly.toml` maps public TCP port 22 to port 2222, adds a TCP health check, and
-mounts the existing `sshshared` volume at `/shared`. The process has a 15-second
+mounts the existing `sshshared` volume at `/shared` in San Jose (`sjc`). The process has a 15-second
 shutdown window. Before a Fly deployment, refresh the content locally:
 
 ```sh

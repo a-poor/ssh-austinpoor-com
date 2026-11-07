@@ -4,7 +4,7 @@
 #
 
 app = 'ssh-austinpoor-com'
-primary_region = 'lax'
+primary_region = 'sjc'
 kill_signal = 'SIGTERM'
 kill_timeout = '15s'
 
@@ -15,7 +15,7 @@ GO_VERSION = '1.27.3'
 [env]
 HOST = '0.0.0.0'
 PORT = '2222'
-HOST_KEY_PATH = '/shared/ssh_host_ed25519_key'
+HOST_KEY_PATH = '/shared/.ssh/id_ed25519'
 
 [[services]]
 internal_port = 2222

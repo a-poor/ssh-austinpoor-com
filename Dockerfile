@@ -13,7 +13,7 @@ RUN CGO_ENABLED=0 go build -trimpath -o /out/ssh-austinpoor-com .
 FROM debian:bookworm-slim
 
 WORKDIR /app
-ENV HOST=0.0.0.0 PORT=2222 HOST_KEY_PATH=/shared/ssh_host_ed25519_key
+ENV HOST=0.0.0.0 PORT=2222 HOST_KEY_PATH=/shared/.ssh/id_ed25519
 COPY --from=builder /out/ssh-austinpoor-com /usr/local/bin/ssh-austinpoor-com
 EXPOSE 2222
 ENTRYPOINT ["/usr/local/bin/ssh-austinpoor-com"]
