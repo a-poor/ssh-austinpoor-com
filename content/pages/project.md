@@ -2,7 +2,7 @@
 
 **ssh.austinpoor.com** is a terminal companion to my website: a place to read a little about me and browse my writing from your terminal.
 
-The interface is built in **Go** with **Bubble Tea**, **Bubbles**, **Lip Gloss**, and **Glamour** for Markdown rendering.
+The interface is built in **Go** with **Bubble Tea**, **Bubbles**, **Lip Gloss**, and **Glamour** for Markdown rendering. **Wish** serves it over SSH, with an independent viewer for each visitor.
 
 The blog is a snapshot of my website's published writing. It refreshes when this app is rebuilt. Each article includes a link to its web version, where you can see images and other content that works better in a browser.
 
